@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Something For You ❤️</title>
+
+<style>
+:root {
+    --forest: #304d3b;
+    --dark-forest: #1c3025;
+    --leaf: #607d5c;
+    --paper: #fffaf0;
+    --brown: #765b43;
+    --gold: #c7a76c;
+    --text: #26352b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--text);
+    overflow: hidden;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(20, 45, 32, .91),
+            rgba(48, 77, 59, .82),
+            rgba(50, 28, 60, .76),
+            rgba(28, 48, 37, .91)
+        ),
+        url("image-1024.jpg") center/cover no-repeat fixed;
+}
+
+.page {
+    width: 100%;
+    height: 100dvh;
+    padding: clamp(8px, 2vw, 25px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.glow {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: rgba(199, 167, 108, .08);
+    filter: blur(70px);
+    pointer-events: none;
+}
+
+.glow.one {
+    top: -120px;
+    left: -120px;
+}
+
+.glow.two {
+    bottom: -130px;
+    right: -120px;
+}
+
+.leaf-float {
+    position: absolute;
+    font-size: clamp(20px, 3vw, 30px);
+    opacity: .18;
+    pointer-events: none;
+    animation: floatLeaf 10s ease-in-out infinite;
+}
+
+.leaf1 { left: 8%; top: 15%; }
+.leaf2 { right: 8%; top: 25%; animation-duration: 12s; }
+.leaf3 { left: 15%; bottom: 15%; animation-duration: 11s; }
+.leaf4 { right: 15%; bottom: 12%; animation-duration: 14s; }
+
+@keyframes floatLeaf {
+    50% {
+        transform: translateY(-30px) rotate(20deg);
+    }
+}
+
+.slider {
+    width: min(900px, 100%);
+    height: min(620px, calc(100dvh - 95px));
+    position: relative;
+    flex-shrink: 1;
+    perspective: 1200px;
+    z-index: 5;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: clamp(25px, 5vw, 55px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 250, 240, .94),
+        rgba(245, 238, 220, .89)
+    );
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 2px solid rgba(199, 167, 108, .65);
+    border-radius: clamp(20px, 3vw, 28px);
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, .40),
+        inset 0 0 35px rgba(199, 167, 108, .14),
+        0 0 40px rgba(91, 53, 100, .12);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(40px) scale(.94) rotateY(-5deg);
+    transition:
+        opacity .6s ease,
+        transform .7s cubic-bezier(.2, .8, .2, 1),
+        visibility .6s;
+    overflow: hidden;
+}
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0) scale(1) rotateY(0);
+}
+
+.slide::before,
+.slide::after {
+    content: "🌿";
+    position: absolute;
+    font-size: clamp(18px, 3vw, 30px);
+    opacity: .55;
+    pointer-events: none;
+}
+
+.slide::before {
+    top: 18px;
+    left: 22px;
+}
+
+.slide::after {
+    bottom: 18px;
+    right: 22px;
+    transform: rotate(180deg);
+}
+
+.small-title {
+    font-size: clamp(.65rem, 1.5vw, 1rem);
+    letter-spacing: clamp(1.5px, .4vw, 3px);
+    text-transform: uppercase;
+    color: var(--leaf);
+    margin-bottom: clamp(8px, 2vw, 15px);
+}
+
+h1 {
+    font-size: clamp(2rem, 7vw, 4.5rem);
+    color: var(--forest);
+    margin-bottom: clamp(12px, 2vw, 20px);
+    line-height: 1.05;
+}
+
+h2 {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    color: var(--forest);
+    margin-bottom: clamp(10px, 2vw, 20px);
+}
+
+p {
+    width: 100%;
+    max-width: 680px;
+    font-size: clamp(.85rem, 2vw, 1.2rem);
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 15px;
+}
+
+.highlight {
+    color: var(--brown);
+    font-weight: bold;
+}
+
+.wishes {
+    width: 100%;
+    max-width: 700px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.wish {
+    padding: clamp(10px, 2vw, 17px);
+    border-radius: 16px;
+    background: rgba(96, 125, 92, .10);
+    border: 1px solid rgba(96, 125, 92, .2);
+}
+
+.wish span {
+    font-size: clamp(.75rem, 1.5vw, .95rem);
+    line-height: 1.5;
+}
+
+.final-slide {
+    justify-content: flex-start;
+    padding-top: clamp(25px, 5vw, 45px);
+}
+
+.final-title {
+    flex-shrink: 0;
+    font-size: clamp(2.3rem, 8vw, 6rem);
+    color: var(--forest);
+    line-height: 1;
+    margin-bottom: 10px;
+    animation: birthdayGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes birthdayGlow {
+    from {
+        transform: scale(1);
+        text-shadow: 0 0 5px rgba(199, 167, 108, .2);
+    }
+
+    to {
+        transform: scale(1.03);
+        text-shadow: 0 0 25px rgba(199, 167, 108, .7);
+    }
+}
+
+.essay {
+    width: 100%;
+    max-width: 720px;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 5px 15px 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    overscroll-behavior: contain;
+}
+
+.essay::-webkit-scrollbar {
+    width: 5px;
+}
+
+.essay::-webkit-scrollbar-track {
+    background: rgba(96, 125, 92, .08);
+    border-radius: 20px;
+}
+
+.essay::-webkit-scrollbar-thumb {
+    background: rgba(96, 125, 92, .45);
+    border-radius: 20px;
+}
+
+.essay p {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.controls {
+    width: min(900px, 100%);
+    height: 44px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    z-index: 100;
+}
+
+button {
+    border: none;
+    padding: 11px 23px;
+    min-width: 90px;
+    border-radius: 50px;
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    color: white;
+    background: var(--forest);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .3);
+    transition: transform .2s ease, background .2s ease, opacity .2s ease;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    background: var(--dark-forest);
+}
+
+button:active {
+    transform: scale(.96);
+}
+
+button:disabled {
+    opacity: .35;
+    cursor: not-allowed;
+    transform: none;
+}
+
+button:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+}
+
+.counter {
+    color: rgba(255, 255, 255, .9);
+    font-size: .85rem;
+    letter-spacing: 2px;
+}
+
+@media (max-width: 800px) {
+    .slider {
+        height: calc(100dvh - 95px);
+    }
+
+    .slide {
+        padding: 35px 25px;
+    }
+
+    .wishes {
+        gap: 8px;
+    }
+}
+
+@media (max-width: 600px) {
+    .slider {
+        height: calc(100dvh - 75px);
+    }
+
+    .slide {
+        padding: 30px 15px;
+        border-radius: 20px;
+    }
+
+    .slide::before {
+        top: 12px;
+        left: 14px;
+    }
+
+    .slide::after {
+        bottom: 12px;
+        right: 14px;
+    }
+
+    p {
+        font-size: .88rem;
+        line-height: 1.5;
+        margin-bottom: 10px;
+    }
+
+    .wishes {
+        grid-template-columns: 1fr;
+        max-height: 65%;
+        overflow-y: auto;
+        padding-right: 3px;
+    }
+
+    .wish {
+        padding: 9px;
+    }
+
+    .final-slide {
+        padding: 25px 12px 10px;
+    }
+
+    .final-title {
+        font-size: clamp(2.1rem, 12vw, 3.8rem);
+    }
+
+    .essay {
+        padding: 3px 8px 15px;
+    }
+
+    .essay p {
+        font-size: .84rem;
+        line-height: 1.48;
+        margin-bottom: 10px;
+    }
+
+    .controls {
+        height: 40px;
+        margin-top: 5px;
+    }
+
+    button {
+        min-width: 78px;
+        padding: 9px 14px;
+        font-size: .8rem;
+    }
+
+    .counter {
+        font-size: .7rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .page {
+        padding: 6px;
+    }
+
+    .slider {
+        height: calc(100dvh - 70px);
+    }
+
+    .slide {
+        padding: 22px 11px;
+    }
+
+    .small-title {
+        font-size: .62rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .essay p {
+        font-size: .76rem;
+        line-height: 1.42;
+    }
+
+    button {
+        min-width: 70px;
+        padding: 8px 11px;
+    }
+}
+
+@media (max-height: 600px) and (max-width: 600px) {
+    .slider {
+        height: calc(100dvh - 68px);
+    }
+
+    .slide {
+        padding: 18px 10px;
+    }
+
+    .final-slide {
+        padding-top: 15px;
+    }
+
+    .final-title {
+        font-size: 2rem;
+        margin-bottom: 5px;
+    }
+
+    .essay p {
+        font-size: .72rem;
+        line-height: 1.35;
+        margin-bottom: 8px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+
+    <div class="leaf-float leaf1">🍃</div>
+    <div class="leaf-float leaf2">🌿</div>
+    <div class="leaf-float leaf3">🍂</div>
+    <div class="leaf-float leaf4">🍃</div>
+
+    <main class="slider">
+
+        <section class="slide active">
+            <h1>Houyyyyyyy👀👀👀👀👀</h1>
+        </section>
+
+        <section class="slide">
+            <div class="small-title"> </div>
+
+            <h2>Bagay na hinihiling ko sa'yo</h2>
+
+            <div class="wishes">
+                <div class="wish">
+                    <span>
+                        Sana matupad lahat ng dreams mo, except kung hindi ako kasama sa mga yon
+                    </span>
+                </div>
+
+                <div class="wish">
+                    <span>
+                        Sana maging masaya ka palagi, kahit minsan ako ang dahilan kung bakit sumasakit ng ulo mo. Hahahha
+                    </span>
+                </div>
+
+                <div class="wish">
+                    <span>
+                        Sana mahanap mo yung taong para sayo, joke lang whhhahahah nand2 lang aqq :>
+                    </span>
+                </div>
+
+                <div class="wish">
+                    <span>
+                        Sana hindi maubos ang chika mo, kasi saan ako kukuha ng latest updates sa buhay mo? Whhwhahhaahah
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide final-slide">
+            <div class="small-title"> </div>
+
+            <h1 class="final-title">
+                Happy<br>Birthday 😽!
+            </h1>
+
+            <div class="essay">
+                <p>
+                    Bakit nga ba 12 months ang isang year?
+                    Like, sino nag decide nun?
+                </p>
+
+                <p>
+                    Pwede naman siguro 10 months lang.
+                    Or 15. Imagine 15 months in a year.
+                    Ang haba nun.
+                </p>
+
+                <p>
+                    And speaking of years, ang bilis talaga
+                    ng time, no?
+                </p>
+
+                <p>
+                    Parang kailan lang, ibang araw lang
+                    yung iniisip natin. Tapos ngayon,
+                    may mga bagong memories na tayo,
+                    may mga bagong tao na nakilala,
+                    and somehow, everyone is getting older.
+                </p>
+
+                <p>Which is actually kind of weird.</p>
+
+                <p>
+                    Kasi technically, every birthday means
+                    one year has passed.
+                </p>
+
+                <p>
+                    Pero bakit birthday ang tawag?
+                    Hindi naman tayo pinanganak ulit.
+                </p>
+
+                <p>
+                    Unless may secret respawn system pala
+                    ang buhay na hindi natin alam.
+                </p>
+
+                <p>
+                    Anyway, habang iniisip ko lahat ng
+                    random things na ito, may naalala ako.
+                </p>
+
+                <p>Ikaw.</p>
+
+                <p>Kasi may birthday ka pala.</p>
+
+                <p>
+                    So ayun, somehow from 12 months,
+                    napunta tayo sa'yo.
+                </p>
+
+                <p>
+                    I don't really know how that happened,
+                    pero nandito na tayo.
+                </p>
+
+                <p>
+                    So instead of making this essay any
+                    more random, gusto ko lang sabihin
+                    na sana maging masaya yung birthday mo.
+                </p>
+
+                <p>
+                    Sana marami kang tawa, good memories,
+                    masarap na food, at mga taong
+                    nagpapasaya sa'yo.
+                </p>
+
+                <p>
+                    Sana maging okay din yung year na
+                    darating para sa'yo, and sana marami
+                    pang magandang bagay ang mangyari.
+                </p>
+
+                <p>
+                    And after all that completely
+                    random explanation...
+                </p>
+
+                <p class="highlight">
+                    happpyy bday pooo 😼😼😼
+                </p>
+
+                <p class="highlight">
+                    You deserve a wonderful day. 
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <div class="controls">
+        <button id="backBtn" type="button">← Back</button>
+
+        <div class="counter" id="counter">1 / 3</div>
+
+        <button id="nextBtn" type="button">Next →</button>
+    </div>
+</div>
+
+<script>
+const slides = document.querySelectorAll(".slide");
+const nextBtn = document.getElementById("nextBtn");
+const backBtn = document.getElementById("backBtn");
+const counter = document.getElementById("counter");
+
+let currentSlide = 0;
+
+function showSlide(index) {
+    currentSlide = Math.max(0, Math.min(index, slides.length - 1));
+
+    slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === currentSlide);
+    });
+
+    counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+    backBtn.disabled = currentSlide === 0;
+    nextBtn.disabled = currentSlide === slides.length - 1;
+}
+
+nextBtn.addEventListener("click", () => showSlide(currentSlide + 1));
+backBtn.addEventListener("click", () => showSlide(currentSlide - 1));
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") showSlide(currentSlide + 1);
+    if (e.key === "ArrowLeft") showSlide(currentSlide - 1);
+});
+
+let touchStartX = 0;
+let touchStartY = 0;
+
+document.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
+
+document.addEventListener("touchend", (e) => {
+    const x = e.changedTouches[0].screenX - touchStartX;
+    const y = e.changedTouches[0].screenY - touchStartY;
+
+    if (Math.abs(x) > Math.abs(y) && Math.abs(x) > 50) {
+        showSlide(currentSlide + (x < 0 ? 1 : -1));
+    }
+}, { passive: true });
+
+showSlide(0);
+</script>
+
+</body>
+</html>
+```
+
